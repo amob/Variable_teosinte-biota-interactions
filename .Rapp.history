@@ -1,0 +1,786 @@
+Pathmtdftrt2$alginate.biosynthesis
+par(mar=c(3,3,2,2))#
+plot(Pathmtdftrt2$alginate.biosynthesis~Pathmtdf2$UMP.biosynthesis.via.de.novo.pathway, col=rgb(rvec,0,bvec), ylim=c(1.8,4.2),xlim=c(45,100),pch=pvec , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)#
+points(Pathmtdftrt2$alginate.biosynthesis[mctrinfo$SampleType=="IJ"]~Pathmtdf2$UMP.biosynthesis.via.de.novo.pathway[mctrinfo$SampleType=="IJ"],pch=8,col="gray")#
+# legend(0.7,0.3,c(expression(paste("0 ",mu,"M zebularine")),expression(paste("400 ",mu,"M zebularine"))),pch=c(1,2),bty="n",col="gray")#
+mtext("%Alginate biosynthesis",side=1,line=2)#
+mtext("%UMP biosynthesis via de novo pathway",side=2,line=2)
+Pathmtdf2$UMP.biosynthesis.via.de.novo.pathway
+colnames(Pathmtdftrt2)
+plot(Pathmtdftrt2$alginate.biosynthesis~Pathmtdf2$UMP.biosynthesis.via.de.novo.pathway, col=rgb(rvec,0,bvec), ylim=c(1.8,4.2),xlim=c(45,100),pch=pvec , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)
+plot(Pathmtdftrt2$alginate.biosynthesis~Pathmtdf2$UMP.biosynthesis.via.de.novo.pathway, col=rgb(rvec,0,bvec), ylim=c(1.8,4.2),xlim=c(45,100),pch=pvec , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)
+plot(Pathmtdftrt2$alginate.biosynthesis~Pathmtdftrt2$UMP.biosynthesis.via.de.novo.pathway, col=rgb(rvec,0,bvec), ylim=c(1.8,4.2),xlim=c(45,100),pch=pvec , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)
+plot(Pathmtdftrt2$alginate.biosynthesis~Pathmtdftrt2$UMP.biosynthesis.via.de.novo.pathway, col=rgb(rvec,0,bvec), pch=pvec , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)
+plot(Pathmtdftrt2$alginate.biosynthesis~Pathmtdftrt2$UMP.biosynthesis.via.de.novo.pathway, col=rgb(rvec,0,bvec), ylim=c(0,2),xlim=c(2.2,4.2),pch=pvec , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)#
+points(Pathmtdftrt2$alginate.biosynthesis[mctrinfo$SampleType=="IJ"]~Pathmtdftrt2$UMP.biosynthesis.via.de.novo.pathway[mctrinfo$SampleType=="IJ"],pch=8,col="gray")
+par(mar=c(3,1.5,2,2.5))#
+plot(Algmns[1:4] ~ c(1:4),pch=16,xlab="",ylab="",ylim=c(0,2),col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, xlim=c(0.8,4.2))#,#
+	arrows(1:4,Algmns[1:4]-Algses[1:4],y1=Algmns[1:4]+Algses[1:4],length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text(1,(Algmns[1]+Algses[1]+0.25),"*")#
+axis(side=4,las=2)
+Algmns <- tapply(Pathmtdftrt2$alginate.biosynthesis,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),mean)#
+Algses <- tapply(Pathmtdftrt2$alginate.biosynthesis,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),std.error)#
+UMPmns
+par(mar=c(3,1.5,2,2.5))#
+plot(Algmns[1:4] ~ c(1:4),pch=16,xlab="",ylab="",ylim=c(0,2),col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, xlim=c(0.8,4.2))#,#
+	arrows(1:4,Algmns[1:4]-Algses[1:4],y1=Algmns[1:4]+Algses[1:4],length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text(1,(Algmns[1]+Algses[1]+0.25),"*")#
+axis(side=4,las=2)
+UMPmns <-tapply(Pathmtdftrt2$UMP.biosynthesis.via.de.novo.pathway,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),mean)#
+UMPses <- tapply(Pathmtdftrt2$UMP.biosynthesis.via.de.novo.pathway,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),std.error)
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/Path2pca_Epi1MT.pdf",height=4,width=4)#
+par(mar=c(3,3,2,2))#
+plot(Pathmtdftrt2$alginate.biosynthesis~Pathmtdftrt2$UMP.biosynthesis.via.de.novo.pathway, col=rgb(rvec,0,bvec), ylim=c(0,2),xlim=c(2.2,4.2),pch=pvec , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)#
+points(Pathmtdftrt2$alginate.biosynthesis[mctrinfo$SampleType=="IJ"]~Pathmtdftrt2$UMP.biosynthesis.via.de.novo.pathway[mctrinfo$SampleType=="IJ"],pch=8,col="gray")#
+mtext("%Alginate biosynthesis",side=2,line=2)#
+mtext("%UMP biosynthesis via de novo pathway",side=1,line=2)#
+dev.off()#
+Algmns <- tapply(Pathmtdftrt2$alginate.biosynthesis,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),mean)#
+Algses <- tapply(Pathmtdftrt2$alginate.biosynthesis,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),std.error)#
+UMPmns <-tapply(Pathmtdftrt2$UMP.biosynthesis.via.de.novo.pathway,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),mean)#
+UMPses <- tapply(Pathmtdftrt2$UMP.biosynthesis.via.de.novo.pathway,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),std.error)#
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/AAB_Epi1MT_slim.pdf",height=1.5,width=4)#
+par(mar=c(1.5,3,2.5,2))#
+plot( c(1:4)~UMPmns[1:4],pch=16,xlab="",ylab="",col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, ylim=c(0.5,4.5),xlim=c(2.2,4.2) )#,#
+	arrows(UMPmns[1:4]-UMPses[1:4],1:4,x1=UMPmns[1:4]+UMPses[1:4],y1=1:4,length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text((UMPmns[1]+UMPses[1]+0.25),1,"*")#
+axis(side=3,las=1)#
+mtext("%Amino-acid biosynthesis",side=1,line=0.25)#
+dev.off()#
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/Alg_Epi1MT_slim.pdf",height=4,width=1.5)#
+par(mar=c(3,1.5,2,2.5))#
+plot(Algmns[1:4] ~ c(1:4),pch=16,xlab="",ylab="",ylim=c(0,2),col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, xlim=c(0.8,4.2))#,#
+	arrows(1:4,Algmns[1:4]-Algses[1:4],y1=Algmns[1:4]+Algses[1:4],length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text(1,(Algmns[1]+Algses[1]+0.25),"*")#
+axis(side=4,las=2)#
+mtext("%Alginate biosynthesis",side=2,line=0.25)#
+dev.off()
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/Path1pca_Epi1MT.pdf",height=4,width=4)#
+par(mar=c(3,3,2,2))#
+plot(Pathmtdf[,"Cofactor biosynthesis"]~Pathmtdf[,"Amino-acid biosynthesis"], col=rgb(rvecP,0,bvecP), pch=pvecP,ylim=c(7,12),xlim=c(18,23) , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)#
+points(Pathmtdf[,"Cofactor biosynthesis"][mctrinfo$SampleType=="IJ"]~Pathmtdf[,"Amino-acid biosynthesis"][mctrinfo$SampleType=="IJ"],pch=8,col="gray")#
+mtext("%Amino-acid biosynthesis",side=1,line=2)#
+mtext("%Cofactor biosynthesis",side=2,line=2)#
+dev.off()#
+CFBmns <- tapply(Pathmtdftrt$Cofactor.biosynthesis,paste(Pathmtdftrt$zeb,Pathmtdftrt$salt),mean)#
+CFBses <- tapply(Pathmtdftrt$Cofactor.biosynthesis,paste(Pathmtdftrt$zeb,Pathmtdftrt$salt),std.error)#
+AABmns <-tapply(Pathmtdftrt$Amino.acid.biosynthesis,paste(Pathmtdftrt$zeb,Pathmtdftrt$salt),mean)#
+AABses <- tapply(Pathmtdftrt$Amino.acid.biosynthesis,paste(Pathmtdftrt$zeb,Pathmtdftrt$salt),std.error)#
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/AAB_Epi1MT_slim.pdf",height=1.5,width=4)#
+par(mar=c(1.5,3,2.5,2))#
+plot( c(1:4)~AABmns[1:4],pch=16,xlab="",ylab="",col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, ylim=c(0.5,4.5),xlim=c(18,23) )#,#
+	arrows(AABmns[1:4]-AABses[1:4],1:4,x1=AABmns[1:4]+AABses[1:4],y1=1:4,length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text((AABmns[1]+AABses[1]+0.25),1,"*")#
+axis(side=3,las=1)#
+mtext("%Amino-acid biosynthesis",side=1,line=0.25)#
+dev.off()#
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/CFB_Epi1MT_slim.pdf",height=4,width=1.5)#
+par(mar=c(3,1.5,2,2.5))#
+plot(CFBmns[1:4] ~ c(1:4),pch=16,xlab="",ylab="",ylim=c(7,12),col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, xlim=c(0.8,4.2))#,#
+	arrows(1:4,CFBmns[1:4]-CFBses[1:4],y1=CFBmns[1:4]+CFBses[1:4],length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text(1,(CFBmns[1]+CFBses[1]+0.25),"*")#
+axis(side=4,las=2)#
+mtext("%Cofactor biosynthesis",side=2,line=0.25)#
+dev.off()#
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/Path2pca_Epi1MT.pdf",height=4,width=4)#
+par(mar=c(3,3,2,2))#
+plot(Pathmtdftrt2$alginate.biosynthesis~Pathmtdftrt2$UMP.biosynthesis.via.de.novo.pathway, col=rgb(rvec,0,bvec), ylim=c(0,2),xlim=c(2.2,4.2),pch=pvec , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)#
+points(Pathmtdftrt2$alginate.biosynthesis[mctrinfo$SampleType=="IJ"]~Pathmtdftrt2$UMP.biosynthesis.via.de.novo.pathway[mctrinfo$SampleType=="IJ"],pch=8,col="gray")#
+mtext("%Alginate biosynthesis",side=2,line=2)#
+mtext("%UMP biosynthesis via de novo pathway",side=1,line=2)#
+dev.off()#
+Algmns <- tapply(Pathmtdftrt2$alginate.biosynthesis,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),mean)#
+Algses <- tapply(Pathmtdftrt2$alginate.biosynthesis,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),std.error)#
+UMPmns <-tapply(Pathmtdftrt2$UMP.biosynthesis.via.de.novo.pathway,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),mean)#
+UMPses <- tapply(Pathmtdftrt2$UMP.biosynthesis.via.de.novo.pathway,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),std.error)#
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/UMP_Epi1MT_slim.pdf",height=1.5,width=4)#
+par(mar=c(1.5,3,2.5,2))#
+plot( c(1:4)~UMPmns[1:4],pch=16,xlab="",ylab="",col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, ylim=c(0.5,4.5),xlim=c(2.2,4.2) )#,#
+	arrows(UMPmns[1:4]-UMPses[1:4],1:4,x1=UMPmns[1:4]+UMPses[1:4],y1=1:4,length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text((UMPmns[1]+UMPses[1]+0.25),1,"*")#
+axis(side=3,las=1)#
+mtext("%UMP biosynthesis via de novo pathway",side=1,line=0.25)#
+dev.off()#
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/Alg_Epi1MT_slim.pdf",height=4,width=1.5)#
+par(mar=c(3,1.5,2,2.5))#
+plot(Algmns[1:4] ~ c(1:4),pch=16,xlab="",ylab="",ylim=c(0,2),col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, xlim=c(0.8,4.2))#,#
+	arrows(1:4,Algmns[1:4]-Algses[1:4],y1=Algmns[1:4]+Algses[1:4],length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text(1,(Algmns[1]+Algses[1]+0.25),"*")#
+axis(side=4,las=2)#
+mtext("%Alginate biosynthesis",side=2,line=0.25)#
+dev.off()
+logtestp <- data.frame(Genus = rownames(filteredMTPdat), #
+		reg = unlist(sapply(1:nrow(filteredMTPdat),function(z) shapiro.test(filteredMTPdat[z,])$statistic)), #
+		log = unlist(sapply(1:nrow(filteredMTPdat),function(z) shapiro.test(log(filteredMTPdat[z,]+minobspath))$statistic)))
+minobspath <- min(filteredMTPdat[which(filteredMTPdatL2>0)])#
+minobspathL2 <- min(filteredMTPdatL2[which(filteredMTPdatL2>0)])#
+#
+logtestp <- data.frame(Genus = rownames(filteredMTPdat), #
+		reg = unlist(sapply(1:nrow(filteredMTPdat),function(z) shapiro.test(filteredMTPdat[z,])$statistic)), #
+		log = unlist(sapply(1:nrow(filteredMTPdat),function(z) shapiro.test(log(filteredMTPdat[z,]+minobspath))$statistic)))
+dim(logtestp)
+dim(filteredMTPdat)
+head(rownames(filteredMTPdat))
+shapiro.test(filteredMTPdat[1,])$statistic)
+shapiro.test(filteredMTPdat[1,])$statistic
+shapiro.test(filteredMTPdat[2,])$statistic
+shapiro.test(filteredMTPdat[3,])$statistic
+minobspath
+min(filteredMTPdat[which(filteredMTPdatL2>0)])
+length(which(filteredMTPdatL2>0))
+dim(filteredMTPdat[which(filteredMTPdatL2>0)])
+dim(filteredMTPdat)
+colnames(filteredMTPdat)
+filterednewSMTE1
+min(filteredMTPdat[which(filteredMTPdatL2>0)],na.rm=T)
+dim(filteredMTPdat[which(filteredMTPdatL2>0)])
+minobspath <- min(filteredMTPdat[which(filteredMTPdat>0)])
+logtestp <- data.frame(Pathway = rownames(filteredMTPdat), #
+		reg = unlist(sapply(1:nrow(filteredMTPdat),function(z) shapiro.test(filteredMTPdat[z,])$statistic)), #
+		log = unlist(sapply(1:nrow(filteredMTPdat),function(z) shapiro.test(log(filteredMTPdat[z,]+minobspath))$statistic)))
+sum(logtestp[,2]<0.9 & logtestp[,2]<logtestp[,3])#
+sum(logtestp[,3]<0.9 & logtestp[,3]<logtestp[,2])#
+sum(logtestp[,2]<0.7 & logtestp[,2]<logtestp[,3])#
+sum(logtestp[,3]<0.7 & logtestp[,3]<logtestp[,2])#
+sum(logtestp[,2]<0.7)#
+sum(logtestp[,3]<0.7)
+length(logtestp)
+length(logtestp[,2])
+logtestp2 <- data.frame(Pathway = rownames(filteredMTPdatL2), #
+		reg = unlist(sapply(1:nrow(filteredMTPdatL2),function(z) shapiro.test(filteredMTPdatL2[z,])$statistic)), #
+		log = unlist(sapply(1:nrow(filteredMTPdatL2),function(z) shapiro.test(log(filteredMTPdatL2[z,]+minobspathL2))$statistic)))
+sum(logtestp2[,2]<0.9 & logtestp2[,2]<logtestp2[,3])#
+sum(logtestp2[,3]<0.9 & logtestp2[,3]<logtestp2[,2])#
+sum(logtestp2[,2]<0.7 & logtestp2[,2]<logtestp2[,3])#
+sum(logtestp2[,3]<0.7 & logtestp2[,3]<logtestp2[,2])#
+sum(logtestp2[,2]<0.7)#
+sum(logtestp2[,3]<0.7)
+dim(logtestp2)
+newP2 <- matrix(0,ncol=ncol(filteredMTPdatL2), nrow=nrow(filteredMTPdatL2))#
+for(i in 1:nrow(newP2)){#
+  newP2[i,] <- as.vector(if(logtestp2[i,2]<logtestp2[i,3]){ log(filteredMTPdatL2[i,]+minobspath2)} else{ filteredMTPdatL2[i,]} )#
+}#
+colnames(newP2)<-colnames(filteredMTPdatL2)#
+rownames(newP2)<-rownames(filteredMTPdatL2)#
+P2pca <- prcomp(t((newP2))) #
+P2pca$rotation[ sapply(1:nrow(P2pca$rotation), function(z) any(abs(P2pca$rotation)[z,1:2]>0.2)) ,1:2]#
+cor(P2pca$x,as.numeric(mctrinfoP$salt),use="complete.obs" )
+newP2 <- matrix(0,ncol=ncol(filteredMTPdatL2), nrow=nrow(filteredMTPdatL2))#
+for(i in 1:nrow(newP2)){#
+  newP2[i,] <- as.vector(if(logtestp2[i,2]<logtestp2[i,3]){ log(filteredMTPdatL2[i,]+minobspathL2)} else{ filteredMTPdatL2[i,]} )#
+}#
+colnames(newP2)<-colnames(filteredMTPdatL2)#
+rownames(newP2)<-rownames(filteredMTPdatL2)#
+P2pca <- prcomp(t((newP2))) #
+P2pca$rotation[ sapply(1:nrow(P2pca$rotation), function(z) any(abs(P2pca$rotation)[z,1:2]>0.2)) ,1:2]#
+cor(P2pca$x,as.numeric(mctrinfoP$salt),use="complete.obs" )
+impvectspL2 <- P2pca$rotation[ unique(c(names(tail(sort(abs(P2pca$rotation[,1])),3)),names(tail(sort(abs(P2pca$rotation[,2])),3))) ) ,1]
+head(round(P2pca$sdev^2/sum(P2pca$sdev^2)*100))
+impvectspL2 <- P2pca$rotation[ unique(c(names(tail(sort(abs(P2pca$rotation[,1])),3)),names(tail(sort(abs(P2pca$rotation[,2])),3))) ) ,1:2]#
+rwb<-colorRampPalette(c(rgb(1,0,0),rgb(1,1,1),rgb(0,0,1)))#
+pwg<-colorRampPalette(c(rgb(0.8,0,0.8),rgb(1,1,1),rgb(0,0.8,0)))#
+pcaxisinfoP2 <- c(paste("PC1, ",round(P2pca$sdev^2/sum(P2pca$sdev^2)*100)[1:2],"%"),#
+					paste("PC2, ",round(P2pca$sdev^2/sum(P2pca$sdev^2)*100)[2],"%"))
+impvectspL2
+pcaxisinfoP2
+pcaxisinfoP2 <- c(paste("PC1, ",round(P2pca$sdev^2/sum(P2pca$sdev^2)*100)[1],"%"),#
+					paste("PC2, ",round(P2pca$sdev^2/sum(P2pca$sdev^2)*100)[2],"%"))
+pcaxisinfoP2
+newP2trt <- cbind(newP2, mctrinfoP)#
+newP2trt <- newP2trt[complete.cases(newP2trt),]#
+newP2trt$trt <- paste(newP2trt$salt,newP2trt$zeb)#
+colnames(newP2trt) <- gsub(" ",".",colnames(newP2trt))
+newP2trt <- cbind(t(newP2), mctrinfoP)#
+newP2trt <- newP2trt[complete.cases(newP2trt),]#
+newP2trt$trt <- paste(newP2trt$salt,newP2trt$zeb)
+colnames(newP2trt) <- gsub(" ",".",colnames(newP2trt))#
+CBmod <- MCMCglmm(chlorophyll.biosynthesis~trt,data=newP2trt,nitt=500000,thin=100,burnin=5000,verbose=F )#
+PUmod <- MCMCglmm(protein.ubiquitination~trt,data=newP2trt,nitt=500000,thin=100,burnin=5000,verbose=F )
+summary
+summary(CBmod)
+summary(PUmod)
+colnames(newP2trt) <- gsub(" ",".",colnames(newP2trt))#
+colnames(newP2trt) <- gsub("-",".",colnames(newP2trt))#
+colnames(newP2trt) <- gsub("(","",colnames(newP2trt))#
+colnames(newP2trt) <- gsub(")","",colnames(newP2trt))#
+CBmod <- MCMCglmm(chlorophyll.biosynthesis~trt,data=newP2trt,nitt=500000,thin=100,burnin=5000,verbose=F )#
+BBLImod <- MCMCglmm(bacteriochlorophyll.biosynthesis.light.independent~trt,data=newP2trt,nitt=500000,thin=100,burnin=5000,verbose=F )
+colnames(newP2trt) <- gsub("\\(","",colnames(newP2trt))#
+colnames(newP2trt) <- gsub("\\)","",colnames(newP2trt))
+BBLImod <- MCMCglmm(bacteriochlorophyll.biosynthesis.light.independent~trt,data=newP2trt,nitt=500000,thin=100,burnin=5000,verbose=F )
+summary(BBLImod)
+colnames(Pathmtdftrt2) <- gsub("\\(","",colnames(Pathmtdftrt2))#
+colnames(Pathmtdftrt2) <- gsub("\\)","",colnames(Pathmtdftrt2))
+par(mar=c(3,3,2,2))#
+plot(Pathmtdftrt2$chlorophyll.biosynthesis~Pathmtdftrt2$bacteriochlorophyll.biosynthesis.light.independent, col=rgb(rvec,0,bvec), ylim=c(0,2),xlim=c(2.2,4.2),pch=pvec , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)#
+points(Pathmtdftrt2$chlorophyll.biosynthesis[mctrinfo$SampleType=="IJ"]~Pathmtdftrt2$bacteriochlorophyll.biosynthesis.light.independent[mctrinfo$SampleType=="IJ"],pch=8,col="gray")#
+mtext("%Chlorophyll biosynthesis",side=2,line=2)#
+mtext("%Bacteriochlorophyll biosynthesis -light independent",side=1,line=2)
+grep("chloroph",colnames(Pathmtdftrt2))
+colnames(Pathmtdftrt2)[grep("chloroph",colnames(Pathmtdftrt2))]
+colnames(Pathmtdftrt2) <- gsub("-",".",colnames(Pathmtdftrt2))
+par(mar=c(3,3,2,2))#
+plot(Pathmtdftrt2$chlorophyll.biosynthesis~Pathmtdftrt2$bacteriochlorophyll.biosynthesis.light.independent, col=rgb(rvec,0,bvec), ylim=c(0,2),xlim=c(2.2,4.2),pch=pvec , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)#
+points(Pathmtdftrt2$chlorophyll.biosynthesis[mctrinfo$SampleType=="IJ"]~Pathmtdftrt2$bacteriochlorophyll.biosynthesis.light.independent[mctrinfo$SampleType=="IJ"],pch=8,col="gray")#
+mtext("%Chlorophyll biosynthesis",side=2,line=2)#
+mtext("%Bacteriochlorophyll biosynthesis -light independent",side=1,line=2)
+par(mar=c(3,3,2,2))#
+plot(Pathmtdftrt2$chlorophyll.biosynthesis~Pathmtdftrt2$bacteriochlorophyll.biosynthesis.light.independent, col=rgb(rvec,0,bvec),pch=pvec , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)#
+points(Pathmtdftrt2$chlorophyll.biosynthesis[mctrinfo$SampleType=="IJ"]~Pathmtdftrt2$bacteriochlorophyll.biosynthesis.light.independent[mctrinfo$SampleType=="IJ"],pch=8,col="gray")#
+mtext("%Chlorophyll biosynthesis",side=2,line=2)#
+mtext("%Bacteriochlorophyll biosynthesis -light independent",side=1,line=2)
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/Path1pca_Epi1MT.pdf",height=4,width=4)#
+par(mar=c(3,3,2,2))#
+plot(Pathmtdf[,"Cofactor biosynthesis"]~Pathmtdf[,"Amino-acid biosynthesis"], col=rgb(rvecP,0,bvecP), pch=pvecP,ylim=c(7,12),xlim=c(18,23) , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)#
+points(Pathmtdf[,"Cofactor biosynthesis"][mctrinfo$SampleType=="IJ"]~Pathmtdf[,"Amino-acid biosynthesis"][mctrinfo$SampleType=="IJ"],pch=8,col="gray")#
+mtext("%Amino-acid biosynthesis",side=1,line=2)#
+mtext("%Cofactor biosynthesis",side=2,line=2)#
+dev.off()#
+CFBmns <- tapply(Pathmtdftrt$Cofactor.biosynthesis,paste(Pathmtdftrt$zeb,Pathmtdftrt$salt),mean)#
+CFBses <- tapply(Pathmtdftrt$Cofactor.biosynthesis,paste(Pathmtdftrt$zeb,Pathmtdftrt$salt),std.error)#
+AABmns <-tapply(Pathmtdftrt$Amino.acid.biosynthesis,paste(Pathmtdftrt$zeb,Pathmtdftrt$salt),mean)#
+AABses <- tapply(Pathmtdftrt$Amino.acid.biosynthesis,paste(Pathmtdftrt$zeb,Pathmtdftrt$salt),std.error)#
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/AAB_Epi1MT_slim.pdf",height=1.5,width=4)#
+par(mar=c(1.5,3,2.5,2))#
+plot( c(1:4)~AABmns[1:4],pch=16,xlab="",ylab="",col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, ylim=c(0.5,4.5),xlim=c(18,23) )#,#
+	arrows(AABmns[1:4]-AABses[1:4],1:4,x1=AABmns[1:4]+AABses[1:4],y1=1:4,length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text((AABmns[1]+AABses[1]+0.25),1,"*")#
+axis(side=3,las=1)#
+mtext("%Amino-acid biosynthesis",side=1,line=0.25)#
+dev.off()#
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/CFB_Epi1MT_slim.pdf",height=4,width=1.5)#
+par(mar=c(3,1.5,2,2.5))#
+plot(CFBmns[1:4] ~ c(1:4),pch=16,xlab="",ylab="",ylim=c(7,12),col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, xlim=c(0.8,4.2))#,#
+	arrows(1:4,CFBmns[1:4]-CFBses[1:4],y1=CFBmns[1:4]+CFBses[1:4],length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text(1,(CFBmns[1]+CFBses[1]+0.25),"*")#
+axis(side=4,las=2)#
+mtext("%Cofactor biosynthesis",side=2,line=0.25)#
+dev.off()#
+##
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/Path2pca_Epi1MT.pdf",height=4,width=4)#
+par(mar=c(3,3,2,2))#
+plot(Pathmtdftrt2$alginate.biosynthesis~Pathmtdftrt2$UMP.biosynthesis.via.de.novo.pathway, col=rgb(rvecP,0,bvecP), ylim=c(0,2),xlim=c(2.2,4.2),pch=pvecP , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)#
+points(Pathmtdftrt2$alginate.biosynthesis[mctrinfo$SampleType=="IJ"]~Pathmtdftrt2$UMP.biosynthesis.via.de.novo.pathway[mctrinfo$SampleType=="IJ"],pch=8,col="gray")#
+mtext("%Alginate biosynthesis",side=2,line=2)#
+mtext("%UMP biosynthesis via de novo pathway",side=1,line=2)#
+dev.off()#
+Algmns <- tapply(Pathmtdftrt2$alginate.biosynthesis,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),mean)#
+Algses <- tapply(Pathmtdftrt2$alginate.biosynthesis,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),std.error)#
+UMPmns <-tapply(Pathmtdftrt2$UMP.biosynthesis.via.de.novo.pathway,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),mean)#
+UMPses <- tapply(Pathmtdftrt2$UMP.biosynthesis.via.de.novo.pathway,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),std.error)#
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/UMP_Epi1MT_slim.pdf",height=1.5,width=4)#
+par(mar=c(1.5,3,2.5,2))#
+plot( c(1:4)~UMPmns[1:4],pch=16,xlab="",ylab="",col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, ylim=c(0.5,4.5),xlim=c(2.2,4.2) )#,#
+	arrows(UMPmns[1:4]-UMPses[1:4],1:4,x1=UMPmns[1:4]+UMPses[1:4],y1=1:4,length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text((UMPmns[1]+UMPses[1]+0.25),1,"*")#
+axis(side=3,las=1)#
+mtext("%UMP biosynthesis via de novo pathway",side=1,line=0.25)#
+dev.off()#
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/Alg_Epi1MT_slim.pdf",height=4,width=1.5)#
+par(mar=c(3,1.5,2,2.5))#
+plot(Algmns[1:4] ~ c(1:4),pch=16,xlab="",ylab="",ylim=c(0,2),col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, xlim=c(0.8,4.2))#,#
+	arrows(1:4,Algmns[1:4]-Algses[1:4],y1=Algmns[1:4]+Algses[1:4],length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text(1,(Algmns[1]+Algses[1]+0.25),"*")#
+axis(side=4,las=2)#
+mtext("%Alginate biosynthesis",side=2,line=0.25)#
+dev.off()
+par(mar=c(3,3,2,2))#
+plot(Pathmtdftrt2$chlorophyll.biosynthesis~Pathmtdftrt2$bacteriochlorophyll.biosynthesis.light.independent, col=rgb(rvecP,0,bvecP), ylim=c(0,2),xlim=c(2.2,4.2),pch=pvecP , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)#
+points(Pathmtdftrt2$chlorophyll.biosynthesis[mctrinfo$SampleType=="IJ"]~Pathmtdftrt2$bacteriochlorophyll.biosynthesis.light.independent[mctrinfo$SampleType=="IJ"],pch=8,col="gray")#
+mtext("%Chlorophyll biosynthesis",side=2,line=2)#
+mtext("%Bacteriochlorophyll biosynthesis -light independent",side=1,line=2)
+par(mar=c(3,3,2,2))#
+plot(Pathmtdftrt2$chlorophyll.biosynthesis~Pathmtdftrt2$bacteriochlorophyll.biosynthesis.light.independent, col=rgb(rvecP,0,bvecP),pch=pvecP , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)#
+points(Pathmtdftrt2$chlorophyll.biosynthesis[mctrinfo$SampleType=="IJ"]~Pathmtdftrt2$bacteriochlorophyll.biosynthesis.light.independent[mctrinfo$SampleType=="IJ"],pch=8,col="gray")#
+mtext("%Chlorophyll biosynthesis",side=2,line=2)#
+mtext("%Bacteriochlorophyll biosynthesis -light independent",side=1,line=2)
+CBmns <- tapply(Pathmtdftrt2$chlorophyll.biosynthesis,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),mean)#
+CBses <- tapply(Pathmtdftrt2$chlorophyll.biosynthesis,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),std.error)#
+BBLImns <-tapply(Pathmtdftrt2$bacteriochlorophyll.biosynthesis.light.independent,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),mean)#
+BBLIses <- tapply(Pathmtdftrt2$bacteriochlorophyll.biosynthesis.light.independent,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),std.error)
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/Path2logpca_Epi1MT.pdf",height=4,width=4)#
+par(mar=c(3,3,2,2))#
+plot(Pathmtdftrt2$chlorophyll.biosynthesis~Pathmtdftrt2$bacteriochlorophyll.biosynthesis.light.independent, col=rgb(rvecP,0,bvecP), ylim=c(0,0.15),xlim=c(0,0.7),pch=pvecP , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)#
+points(Pathmtdftrt2$chlorophyll.biosynthesis[mctrinfo$SampleType=="IJ"]~Pathmtdftrt2$bacteriochlorophyll.biosynthesis.light.independent[mctrinfo$SampleType=="IJ"],pch=8,col="gray")#
+mtext("%Chlorophyll biosynthesis",side=2,line=2)#
+mtext("%Bacteriochlorophyll biosynthesis -light independent",side=1,line=2)#
+dev.off()#
+CBmns <- tapply(Pathmtdftrt2$chlorophyll.biosynthesis,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),mean)#
+CBses <- tapply(Pathmtdftrt2$chlorophyll.biosynthesis,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),std.error)#
+BBLImns <-tapply(Pathmtdftrt2$bacteriochlorophyll.biosynthesis.light.independent,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),mean)#
+BBLIses <- tapply(Pathmtdftrt2$bacteriochlorophyll.biosynthesis.light.independent,paste(Pathmtdftrt2$zeb,Pathmtdftrt2$salt),std.error)#
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/BBLI_Epi1MT_slim.pdf",height=1.5,width=4)#
+par(mar=c(1.5,3,2.5,2))#
+plot( c(1:4)~BBLImns[1:4],pch=16,xlab="",ylab="",col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, ylim=c(0.5,4.5),xlim=c(0,0.7) )#,#
+	arrows(BBLImns[1:4]-BBLIses[1:4],1:4,x1=BBLImns[1:4]+BBLIses[1:4],y1=1:4,length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text((BBLImns[1]+BBLIses[1]+0.25),1,"*")#
+axis(side=3,las=1)#
+mtext("%Bacteriochlorophyll biosynthesis -light independent",side=1,line=0.25)#
+dev.off()#
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/CB_Epi1MT_slim.pdf",height=4,width=1.5)#
+par(mar=c(3,1.5,2,2.5))#
+plot(CBmns[1:4] ~ c(1:4),pch=16,xlab="",ylab="",ylim=c(0,0.15),col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, xlim=c(0.8,4.2))#,#
+	arrows(1:4,CBmns[1:4]-CBses[1:4],y1=CBmns[1:4]+CBses[1:4],length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text(1,(CBmns[1]+CBses[1]+0.25),"*")#
+axis(side=4,las=2)#
+mtext("%Chlorophyll biosynthesis",side=2,line=0.25)#
+dev.off()
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/BBLI_Epi1MT_slim.pdf",height=1.5,width=4)#
+par(mar=c(1.5,3,2.5,2))#
+plot( c(1:4)~BBLImns[1:4],pch=16,xlab="",ylab="",col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, ylim=c(0.5,4.5),xlim=c(0,0.7) )#,#
+	arrows(BBLImns[1:4]-BBLIses[1:4],1:4,x1=BBLImns[1:4]+BBLIses[1:4],y1=1:4,length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text((BBLImns[1]+BBLIses[1]+0.05),1,"*")#
+axis(side=3,las=1)#
+mtext("%Bacteriochlorophyll biosynthesis -light independent",side=1,line=0.25)#
+dev.off()#
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/CB_Epi1MT_slim.pdf",height=4,width=1.5)#
+par(mar=c(3,1.5,2,2.5))#
+plot(CBmns[1:4] ~ c(1:4),pch=16,xlab="",ylab="",ylim=c(0,0.15),col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, xlim=c(0.8,4.2))#,#
+	arrows(1:4,CBmns[1:4]-CBses[1:4],y1=CBmns[1:4]+CBses[1:4],length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text(1,(CBmns[1]+CBses[1]+0.025),"*")#
+axis(side=4,las=2)#
+mtext("%Chlorophyll biosynthesis",side=2,line=0.25)#
+dev.off()
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/CB_Epi1MT_slim.pdf",height=4,width=1.5)#
+par(mar=c(3,1.5,2,2.5))#
+plot(CBmns[1:4] ~ c(1:4),pch=16,xlab="",ylab="",ylim=c(0,0.15),col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, xlim=c(0.8,4.2))#,#
+	arrows(1:4,CBmns[1:4]-CBses[1:4],y1=CBmns[1:4]+CBses[1:4],length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text(1,(CBmns[1]+CBses[1]+0.01),"*")#
+axis(side=4,las=2)#
+mtext("%Chlorophyll biosynthesis",side=2,line=0.25)#
+dev.off()
+summary(CBmod)
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/CB_Epi1MT_slim.pdf",height=4,width=1.5)#
+par(mar=c(3,1.5,2,2.75))#
+plot(CBmns[1:4] ~ c(1:4),pch=16,xlab="",ylab="",ylim=c(0,0.15),col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, xlim=c(0.8,4.2))#,#
+	arrows(1:4,CBmns[1:4]-CBses[1:4],y1=CBmns[1:4]+CBses[1:4],length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text(1,(CBmns[1]+CBses[1]+0.01),"*")#
+axis(side=4,las=2)#
+mtext("%Chlorophyll biosynthesis",side=2,line=0.25)#
+dev.off()
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/BBLI_Epi1MT_slim.pdf",height=1.5,width=4)#
+par(mar=c(1.5,3,2.5,2))#
+plot( c(1:4)~BBLImns[1:4],pch=16,xlab="",ylab="",col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, ylim=c(0.5,4.5),xlim=c(0,0.7) )#,#
+	arrows(BBLImns[1:4]-BBLIses[1:4],1:4,x1=BBLImns[1:4]+BBLIses[1:4],y1=1:4,length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text((BBLImns[1]+BBLIses[1]+0.05),1,"*")#
+axis(side=3,las=1)#
+mtext("%Bacteriochlorophyll biosynthesis - light ind.",side=1,line=0.25)#
+dev.off()
+dim(Pathmtdftrt2)
+tail(sort(colSums(Pathmtdf2)),2)
+par(mar=c(3,3,2,2))#
+plot(Pathmtdftrt2$L.arginine.biosynthesis~Pathmtdftrt2$IMP.biosynthesis.via.de.novo.pathway, col=rgb(rvecP,0,bvecP), ylim=c(0,2),xlim=c(2.2,4.2),pch=pvecP , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)#
+points(Pathmtdftrt2$L.arginine.biosynthesis[mctrinfo$SampleType=="IJ"]~Pathmtdftrt2$IMP.biosynthesis.via.de.novo.pathway[mctrinfo$SampleType=="IJ"],pch=8,col="gray")#
+mtext("%L-arginine biosynthesis",side=2,line=2)#
+mtext("%IMP biosynthesis via de novo pathway",side=1,line=2)
+par(mar=c(3,3,2,2))#
+plot(Pathmtdftrt2$L.arginine.biosynthesis~Pathmtdftrt2$IMP.biosynthesis.via.de.novo.pathway, col=rgb(rvecP,0,bvecP),pch=pvecP , xlab="",ylab="",lwd=1.25,las=2,cex=1.25)#
+points(Pathmtdftrt2$L.arginine.biosynthesis[mctrinfo$SampleType=="IJ"]~Pathmtdftrt2$IMP.biosynthesis.via.de.novo.pathway[mctrinfo$SampleType=="IJ"],pch=8,col="gray")#
+mtext("%L-arginine biosynthesis",side=2,line=2)#
+mtext("%IMP biosynthesis via de novo pathway",side=1,line=2)
+LArgmod <- MCMCglmm(L.arginine.biosynthesis~trt,data=Pathmtdftrt2,nitt=500000,thin=100,burnin=5000,verbose=F )#
+IMPmod <- MCMCglmm(IMP.biosynthesis.via.de.novo.pathway~trt,data=Pathmtdftrt2,nitt=500000,thin=100,burnin=5000,verbose=F )
+summary(IMPmod)
+summary(LArgPmod)
+summary(LArgmod)
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/PathlogPCAtabL2_Epi1MT.pdf",height=3.25,width=4)#
+layout(matrix(1:2,ncol=1),heights=c(5,1.5))#
+par(mar=c(6.5,18,0,0))#
+image(t(impvectsplog2),zlim=c(-1,1),col=pwg(50),xaxt="n",yaxt="n")#
+	axis(at=c(0),labels=pcaxisinfoPlog2,side=1,las=2)#
+	axis(at=seq(from=0,to=1,length.out=length(impvectsplog2)),labels=names(impvectsplog2),side=2,las=2)#
+par(mar=c(2,8,1,0))#
+image(as.matrix(seq(from=-1,to=1,length.out=50)),zlim=c(-1,1),col=pwg(50),xaxt="n",yaxt="n")#
+	mtext("Loading on PC axis",side=1,)#
+dev.off()
+impvectsplog2 <- P2pca$rotation[ unique(c(names(tail(sort(abs(P2pca$rotation[,1])),3)),names(tail(sort(abs(P2pca$rotation[,2])),3))) ) ,1:2]#
+rwb<-colorRampPalette(c(rgb(1,0,0),rgb(1,1,1),rgb(0,0,1)))#
+pwg<-colorRampPalette(c(rgb(0.8,0,0.8),rgb(1,1,1),rgb(0,0.8,0)))#
+pcaxisinfoPlog2 <- c(paste("PC1, ",round(P2pca$sdev^2/sum(P2pca$sdev^2)*100)[1],"%"),#
+					paste("PC2, ",round(P2pca$sdev^2/sum(P2pca$sdev^2)*100)[2],"%"))#
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/PathlogPCAtabL2_Epi1MT.pdf",height=3.25,width=4)#
+layout(matrix(1:2,ncol=1),heights=c(5,1.5))#
+par(mar=c(6.5,18,0,0))#
+image(t(impvectsplog2),zlim=c(-1,1),col=pwg(50),xaxt="n",yaxt="n")#
+	axis(at=c(0),labels=pcaxisinfoPlog2,side=1,las=2)#
+	axis(at=seq(from=0,to=1,length.out=length(impvectsplog2)),labels=names(impvectsplog2),side=2,las=2)#
+par(mar=c(2,8,1,0))#
+image(as.matrix(seq(from=-1,to=1,length.out=50)),zlim=c(-1,1),col=pwg(50),xaxt="n",yaxt="n")#
+	mtext("Loading on PC axis",side=1,)#
+dev.off()
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/PathlogPCAtabL2_Epi1MT.pdf",height=3.25,width=4)#
+layout(matrix(1:2,ncol=1),heights=c(5,1.5))#
+par(mar=c(6.5,18,0,0))#
+image(t(impvectsplog2),zlim=c(-1,1),col=pwg(50),xaxt="n",yaxt="n")#
+	axis(at=c(0),labels=pcaxisinfoPlog2,side=1,las=2)#
+	axis(at=seq(from=0,to=1,length.out=nrow(impvectsplog2)),labels=names(impvectsplog2),side=2,las=2)#
+par(mar=c(2,8,1,0))#
+image(as.matrix(seq(from=-1,to=1,length.out=50)),zlim=c(-1,1),col=pwg(50),xaxt="n",yaxt="n")#
+	mtext("Loading on PC axis",side=1,)#
+dev.off()
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/PathlogPCAtabL2_Epi1MT.pdf",height=3.25,width=4)#
+layout(matrix(1:2,ncol=1),heights=c(5,1.5))#
+par(mar=c(6.5,18,0,0))#
+image(t(impvectsplog2),zlim=c(-1,1),col=pwg(50),xaxt="n",yaxt="n")#
+	axis(at=c(0,1),labels=pcaxisinfoPlog2,side=1,las=2)#
+	axis(at=seq(from=0,to=1,length.out=nrow(impvectsplog2)),labels=names(impvectsplog2),side=2,las=2)#
+par(mar=c(2,8,1,0))#
+image(as.matrix(seq(from=-1,to=1,length.out=50)),zlim=c(-1,1),col=pwg(50),xaxt="n",yaxt="n")#
+	mtext("Loading on PC axis",side=1,)#
+dev.off()
+names(impvectsplog2)
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/PathlogPCAtabL2_Epi1MT.pdf",height=3.25,width=4)#
+layout(matrix(1:2,ncol=1),heights=c(5,1.5))#
+par(mar=c(6.5,18,0,0))#
+image(t(impvectsplog2),zlim=c(-1,1),col=pwg(50),xaxt="n",yaxt="n")#
+	axis(at=c(0,1),labels=pcaxisinfoPlog2,side=1,las=2)#
+	axis(at=seq(from=0,to=1,length.out=nrow(impvectsplog2)),labels=rownames(impvectsplog2),side=2,las=2)#
+par(mar=c(2,8,1,0))#
+image(as.matrix(seq(from=-1,to=1,length.out=50)),zlim=c(-1,1),col=pwg(50),xaxt="n",yaxt="n")#
+	mtext("Loading on PC axis",side=1,)#
+dev.off()
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/PathlogPCAtabL2_Epi1MT.pdf",height=3.25,width=4.25)#
+layout(matrix(1:2,ncol=1),heights=c(5,1.5))#
+par(mar=c(6.5,21,0,0))#
+image(t(impvectsplog2),zlim=c(-1,1),col=pwg(50),xaxt="n",yaxt="n")#
+	axis(at=c(0,1),labels=pcaxisinfoPlog2,side=1,las=2)#
+	axis(at=seq(from=0,to=1,length.out=nrow(impvectsplog2)),labels=rownames(impvectsplog2),side=2,las=2)#
+par(mar=c(2,8,1,0))#
+image(as.matrix(seq(from=-1,to=1,length.out=50)),zlim=c(-1,1),col=pwg(50),xaxt="n",yaxt="n")#
+	mtext("Loading on PC axis",side=1,)#
+dev.off()
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/PathlogPCAtabL2_Epi1MT.pdf",height=3.25,width=4.5)#
+layout(matrix(1:2,ncol=1),heights=c(5,1.5))#
+par(mar=c(6.5,18,0,0))#
+image(t(impvectsplog2),zlim=c(-1,1),col=pwg(50),xaxt="n",yaxt="n")#
+	axis(at=c(0,1),labels=pcaxisinfoPlog2,side=1,las=2)#
+	axis(at=seq(from=0,to=1,length.out=nrow(impvectsplog2)),labels=rownames(impvectsplog2),side=2,las=2)#
+par(mar=c(2,8,1,0))#
+image(as.matrix(seq(from=-1,to=1,length.out=50)),zlim=c(-1,1),col=pwg(50),xaxt="n",yaxt="n")#
+	mtext("Loading on PC axis",side=1,)#
+dev.off()
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/PathlogPCAtabL2_Epi1MT.pdf",height=3.25,width=4.5)#
+layout(matrix(1:2,ncol=1),heights=c(5,1.5))#
+par(mar=c(6.5,20,0,0))#
+image(t(impvectsplog2),zlim=c(-1,1),col=pwg(50),xaxt="n",yaxt="n")#
+	axis(at=c(0,1),labels=pcaxisinfoPlog2,side=1,las=2)#
+	axis(at=seq(from=0,to=1,length.out=nrow(impvectsplog2)),labels=rownames(impvectsplog2),side=2,las=2)#
+par(mar=c(2,8,1,0))#
+image(as.matrix(seq(from=-1,to=1,length.out=50)),zlim=c(-1,1),col=pwg(50),xaxt="n",yaxt="n")#
+	mtext("Loading on PC axis",side=1,)#
+dev.off()
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/PathlogPCAtabL2_Epi1MT.pdf",height=3.25,width=4.5)#
+layout(matrix(1:2,ncol=1),heights=c(5,1.5))#
+par(mar=c(6.5,21,0,0))#
+image(t(impvectsplog2),zlim=c(-1,1),col=pwg(50),xaxt="n",yaxt="n")#
+	axis(at=c(0,1),labels=pcaxisinfoPlog2,side=1,las=2)#
+	axis(at=seq(from=0,to=1,length.out=nrow(impvectsplog2)),labels=rownames(impvectsplog2),side=2,las=2)#
+par(mar=c(2,8,1,0))#
+image(as.matrix(seq(from=-1,to=1,length.out=50)),zlim=c(-1,1),col=pwg(50),xaxt="n",yaxt="n")#
+	mtext("Loading on PC axis",side=1,)#
+dev.off()
+ls()
+dim(filteredMTPdat)
+head(filteredMTPdat)
+head(filteredMTPdatL2)
+grep("hlorop", rownames(filteredMTPdatL2))
+rownames(filteredMTPdatL2)[grep("hlorop", rownames(filteredMTPdatL2))]
+rownames(filteredMTPdatL2)[grep("hloroph", rownames(filteredMTPdatL2))]
+rownames(filteredMTPdatL2)[grep("chlorophy", rownames(filteredMTPdatL2))]
+rownames(filteredMTPdatL2)[grep("photosy", rownames(filteredMTPdatL2))]
+rownames(filteredMTPdatL2)[grep("photos", rownames(filteredMTPdatL2))]
+rownames(filteredMTPdatL2)[grep("photo", rownames(filteredMTPdatL2))]
+rownames(filteredMTPdatL2)[grep("plast", rownames(filteredMTPdatL2))]
+colSums(filteredMTPdatL2[grep("plast", rownames(filteredMTPdatL2)),]
+colSums(filteredMTPdatL2[grep("plast", rownames(filteredMTPdatL2)),])
+colSums(filteredMTPdatL2[grep("chloroph", rownames(filteredMTPdatL2)),])
+colSums(filteredMTPdatL2[grep("chlorophyll", rownames(filteredMTPdatL2)),])
+dim(newP2)
+head(newP2)
+plot(colSums(newP2[grep("chlorophyll", rownames(newP2)),])~1:ncol(newP2),col=rgb(rvecP,0,bvecP),pch=pvecP)
+plot(colSums(newP2[grep("chlorophyll", rownames(newP2)),])~c(1:ncol(newP2)),col=rgb(rvecP,0,bvecP),pch=pvecP)
+newP2trt$allChlorphyllSynth <- colSums(newP2[grep("chlorophyll", rownames(newP2)),])
+dim(newP2trt)
+dim(newP2)
+newP2trt <- cbind(t(newP2), mctrinfoP)#
+newP2trt <- newP2trt[complete.cases(newP2trt),]#
+newP2trt$trt <- paste(newP2trt$salt,newP2trt$zeb)#
+colnames(newP2trt) <- gsub(" ",".",colnames(newP2trt))#
+colnames(newP2trt) <- gsub("-",".",colnames(newP2trt))#
+colnames(newP2trt) <- gsub("\\(","",colnames(newP2trt))#
+colnames(newP2trt) <- gsub("\\)","",colnames(newP2trt))
+dim(newP2)
+dim(newP2trt)
+newP2trt <- cbind(t(newP2), mctrinfoP)
+dim(newP2trt)
+newP2trt <- newP2trt[complete.cases(newP2trt),]
+dim(newP2trt)
+newP2trt[1,]
+newP2trt[,1]
+complete.cases(newP2trt)
+dim(newP2trt)
+newP2trt <- cbind(t(newP2), mctrinfoP)
+complete.cases(newP2trt)
+which(is.na(newP2trt[13,]))
+newP2trt[12,which(is.na(newP2trt[13,]))]
+newP2trt[13,which(is.na(newP2trt[13,]))]
+newP2[,grep("chlorophyll", colnames(newP2))]
+grep("chlorophyll", colnames(newP2))
+head(colnames(newP2))
+newP2trt <- cbind(t(newP2), mctrinfoP)#
+newP2trt <- newP2trt[complete.cases(newP2trt),]#
+newP2trt$trt <- paste(newP2trt$salt,newP2trt$zeb)#
+colnames(newP2trt) <- gsub(" ",".",colnames(newP2trt))#
+colnames(newP2trt) <- gsub("-",".",colnames(newP2trt))#
+colnames(newP2trt) <- gsub("\\(","",colnames(newP2trt))#
+colnames(newP2trt) <- gsub("\\)","",colnames(newP2trt))
+head(colnames(newP2))
+grep("chlorophyll", colnames(newP2trt))
+newP2trt[,grep("chlorophyll", colnames(newP2trt))]
+colSums(filteredMTPdatL2[,grep("chlorophyll", rownames(filteredMTPdatL2))])
+colSums(filteredMTPdatL2[grep("chlorophyll", rownames(filteredMTPdatL2)),])
+filteredMTPdatL2[grep("chlorophyll", rownames(filteredMTPdatL2)),]
+newP2wChl <- newP2#
+newP2$allChlorphyllSynth <- colSums(filteredMTPdatL2[,grep("chlorophyll", rownames(filteredMTPdatL2))])
+newP2wChl <- newP2#
+newP2wChl$allChlorphyllSynth <- colSums(filteredMTPdatL2[grep("chlorophyll", rownames(filteredMTPdatL2)),])#
+newP2trt <- cbind(t(newP2wChl), mctrinfoP)#
+newP2trt <- newP2trt[complete.cases(newP2trt),]#
+newP2trt$trt <- paste(newP2trt$salt,newP2trt$zeb)#
+colnames(newP2trt) <- gsub(" ",".",colnames(newP2trt))#
+colnames(newP2trt) <- gsub("-",".",colnames(newP2trt))#
+colnames(newP2trt) <- gsub("\\(","",colnames(newP2trt))#
+colnames(newP2trt) <- gsub("\\)","",colnames(newP2trt))
+grep("chlorophyll", rownames(filteredMTPdatL2))
+dim(filteredMTPdatL2)
+filteredMTPdatL2[grep("chlorophyll", rownames(filteredMTPdatL2)),]
+colSums(filteredMTPdatL2[grep("chlorophyll", rownames(filteredMTPdatL2)),])
+newP2wChl <- rbind(newP2wChl, allchloro = colSums(filteredMTPdatL2[grep("chlorophyll", rownames(filteredMTPdatL2)),]))
+dim(newP2wChl)
+dim(newP2)
+newP2wChl <- rbind(newP2, allchloro = colSums(filteredMTPdatL2[grep("chlorophyll", rownames(filteredMTPdatL2)),]))
+dim(newP2wChl)
+tail(rownames(newP2wChl))
+newP2trt <- cbind(t(newP2wChl), mctrinfoP)#
+newP2trt <- newP2trt[complete.cases(newP2trt),]#
+newP2trt$trt <- paste(newP2trt$salt,newP2trt$zeb)#
+colnames(newP2trt) <- gsub(" ",".",colnames(newP2trt))#
+colnames(newP2trt) <- gsub("-",".",colnames(newP2trt))#
+colnames(newP2trt) <- gsub("\\(","",colnames(newP2trt))#
+colnames(newP2trt) <- gsub("\\)","",colnames(newP2trt))#
+CBmod <- MCMCglmm(chlorophyll.biosynthesis~trt,data=newP2trt,nitt=500000,thin=100,burnin=5000,verbose=F )#
+BBLImod <- MCMCglmm(bacteriochlorophyll.biosynthesis.light.independent~trt,data=newP2trt,nitt=500000,thin=100,burnin=5000,verbose=F )
+ACmod <- MCMCglmm(allchloro~trt,data=newP2trt,nitt=500000,thin=100,burnin=5000,verbose=F )
+summary(ACmod)
+dim(Pathmtdftrt2)
+dim(newP2wChl)
+Pathmtdftrt2$allchloro <-  colSums(filteredMTPdatL2[grep("chlorophyll", rownames(filteredMTPdatL2)),])
+dim(filteredMTPdatL2)
+dim(Pathmtdftrt2)
+ACmns <- tapply(newP2trt$allchloro,paste(newP2trt$zeb,newP2trt$salt),mean)#
+ACses <- tapply(newP2trt$allchloro,paste(newP2trt$zeb,newP2trt$salt),std.error)
+ACmns
+ACses
+par(mar=c(3,1.5,2,2.75))#
+plot(ACmns[1:4] ~ c(1:4),pch=16,xlab="",ylab="",ylim=c(0,0.15),col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, xlim=c(0.8,4.2))#,#
+	arrows(1:4,ACmns[1:4]-ACses[1:4],y1=ACmns[1:4]+ACses[1:4],length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text(1,(ACmns[1]+ACses[1]+0.01),"*")#
+axis(side=4,las=2)#
+mtext("%Chlorophyll functions",side=2,line=0.25)
+CBmns
+Pathmtdftrt2$chlorophyll.biosynthesis
+filteredMTPdatL2[grep("chlorophyll", rownames(filteredMTPdatL2)),]
+head(colnames(newP2trt))
+newP2wChl$chlorophyll.biosynthesis
+newP2wChl[,"chlorophyll.biosynthesis"]
+newP2wChl[,"chlorophyllbiosynthesis"]
+newP2wChl[,"chlorophyll.biosynthesis"]
+newP2wChl[,"chlorophyll.biosynthesis"]
+newP2trt[,"chlorophyll.biosynthesis"]
+ACmns <- 100*tapply(newP2trt$allchloro,paste(newP2trt$zeb,newP2trt$salt),mean)#
+ACses <- 100*tapply(newP2trt$allchloro,paste(newP2trt$zeb,newP2trt$salt),std.error)
+par(mar=c(3,1.5,2,2.75))#
+plot(ACmns[1:4] ~ c(1:4),pch=16,xlab="",ylab="",ylim=c(0,0.15),col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, xlim=c(0.8,4.2))#,#
+	arrows(1:4,ACmns[1:4]-ACses[1:4],y1=ACmns[1:4]+ACses[1:4],length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text(1,(ACmns[1]+ACses[1]+0.01),"*")#
+axis(side=4,las=2)#
+mtext("%Chlorophyll functions",side=2,line=0.25)
+ACmns
+ACses
+plot(ACmns[1:4] ~ c(1:4),pch=16,xlab="",ylab="",ylim=c(0,1),col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, xlim=c(0.8,4.2))#,#
+	arrows(1:4,ACmns[1:4]-ACses[1:4],y1=ACmns[1:4]+ACses[1:4],length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text(1,(ACmns[1]+ACses[1]+0.01),"*")#
+axis(side=4,las=2)#
+mtext("%Chlorophyll functions",side=2,line=0.25)
+pdf("~/LemnaEpi1MicrobiomeAnalysis/Outputs/AllChloro_Epi1MT_slim.pdf",height=4,width=1.5)#
+par(mar=c(3,1.5,2,2.75))#
+plot(ACmns[1:4] ~ c(1:4),pch=16,xlab="",ylab="",ylim=c(0,1),col=rgb(c(0,1,0,1),0,c(0,0,1,1)),xaxt="n", yaxt="n", cex=1.5, xlim=c(0.8,4.2))#,#
+	arrows(1:4,ACmns[1:4]-ACses[1:4],y1=ACmns[1:4]+ACses[1:4],length=0, col=rgb(c(0,1,0,1),0,c(0,0,1,1)),lwd=2)#
+	text(1,(ACmns[1]+ACses[1]+0.1),"*")#
+axis(side=4,las=2)#
+mtext("%Chlorophyll functions",side=2,line=0.25)#
+dev.off()
+estDilute <- function(od) {#
+	dilutionfactors <- c(2,4,6,8,10,12)#
+	newod <- c()#
+	newod[1] <- od*0.7507 - 0.303#
+	for(i in 2:length(dilutionfactors)){#
+		newod[i] <- newod[i-1]*0.7507 - 0.303#
+	}#
+	dat <- data.frame(y=newod,d=dilutionfactors)#
+	mod <- nls(y ~ yf + (y0 - yf) * exp(-alpha * d), #
+    data = dat,#
+    start = list(y0 = 54, yf = 25, alpha = 1))#
+    return(mod)#
+}
+estDilute(0.2)
+estDilute(20)
+estDilute(300)
+od
+od <- 30
+dilutionfactors <- c(2,4,6,8,10,12)#
+	newod <- c()
+dilutionfactors
+newod[1] <- od*0.7507 - 0.303#
+	for(i in 2:length(dilutionfactors)){#
+		newod[i] <- newod[i-1]*0.7507 - 0.303#
+	}
+newod
+dat <- data.frame(y=newod,d=dilutionfactors)#
+	mod <- nls(y ~ yf + (y0 - yf) * exp(-alpha * d), #
+    data = dat,#
+    start = list(y0 = 54, yf = 25, alpha = 1))
+plot(newod~dilutionfactors)
+mod <- nls(y ~ SSasymp(d, yf, y0, log_alpha),  data = dat)
+od
+od <- 1
+dilutionfactors <- c(2,4,6,8,10,12)#
+	newod <- c()#
+	newod[1] <- od*0.7507 - 0.303#
+	for(i in 2:length(dilutionfactors)){#
+		newod[i] <- newod[i-1]*0.7507 - 0.303#
+	}#
+	dat <- data.frame(y=newod,d=dilutionfactors)#
+# 	mod <- nls(y ~ yf + (y0 - yf) * exp(-alpha * d), #
+#     data = dat,#
+#     start = list(y0 = 54, yf = 25, alpha = 1))#
+	mod <- nls(y ~ SSasymp(d, yf, y0, log_alpha),  data = dat)
+SSasymp(d, yf, y0, log_alpha)
+od
+dilutionfactors <- c(2,4,6,8,10,12,24,48,96)#
+	newod <- c()#
+	newod[1] <- od*0.7507 - 0.303#
+	for(i in 2:length(dilutionfactors)){#
+		newod[i] <- newod[i-1]*0.7507 - 0.303#
+	}#
+	dat <- data.frame(y=newod,d=dilutionfactors)#
+# 	mod <- nls(y ~ yf + (y0 - yf) * exp(-alpha * d), #
+#     data = dat,#
+#     start = list(y0 = 54, yf = 25, alpha = 1))#
+	mod <- nls(y ~ SSasymp(d, yf, y0, log_alpha),  data = dat)
+mod
+od <- 0.15
+dilutionfactors <- c(2,4,6,8,10,12,24,48,96)#
+	newod <- c()#
+	newod[1] <- od*0.7507 - 0.303#
+	for(i in 2:length(dilutionfactors)){#
+		newod[i] <- newod[i-1]*0.7507 - 0.303#
+	}#
+	dat <- data.frame(y=newod,d=dilutionfactors)#
+# 	mod <- nls(y ~ yf + (y0 - yf) * exp(-alpha * d), #
+#     data = dat,#
+#     start = list(y0 = 54, yf = 25, alpha = 1))#
+	mod <- nls(y ~ SSasymp(d, yf, y0, log_alpha),  data = dat)
+mod
+predict(mod,c(0.1))
+predict(mod,c(0.1,0.2))
+str(mod)
+mod
+summary(mod)
+str(summary(mod))
+summary(mod)$coefficients
+help(exp)
+help(log)
+exp(3)
+log(exp(3))
+yf <- summary(mod)$coefficients[1,1]#
+	y0 <- summary(mod)$coefficients[2,1]#
+	log_a <- summary(mod)$coefficients[3,1]#
+	dilute <- log( (target_od - yf)/(y0-yf) ) / (-1*exp(log_a))
+target_od <- 0.1
+target_od <- 0.05
+yf <- summary(mod)$coefficients[1,1]#
+	y0 <- summary(mod)$coefficients[2,1]#
+	log_a <- summary(mod)$coefficients[3,1]#
+	dilute <- log( (target_od - yf)/(y0-yf) ) / (-1*exp(log_a))
+dilute
+od
+1/2
+1/.77
+plot(newod~dilutionfactors)
+newod
+od
+dilutionfactors <- c(2,4,6,8,10,12,24,48,96)#
+	newod <- c()#
+	newod[1] <- od*0.7507 - 0.303#
+	for(i in 2:length(dilutionfactors)){#
+		newod[i] <- newod[i-1]*0.7507 - 0.303#
+	}#
+	dat <- data.frame(y=newod,d=dilutionfactors)#
+# 	mod <- nls(y ~ yf + (y0 - yf) * exp(-alpha * d), #
+#     data = dat,#
+#     start = list(y0 = 54, yf = 25, alpha = 1))#
+	mod <- nls(y ~ SSasymp(d, yf, y0, log_alpha),  data = dat)#
+	yf <- summary(mod)$coefficients[1,1]#
+	y0 <- summary(mod)$coefficients[2,1]#
+	log_a <- summary(mod)$coefficients[3,1]#
+	dilute <- log( (target_od - yf)/(y0-yf) ) / (-1*exp(log_a))
+newod
+dilutionfactors <- c(2,4,6,8,10,12,24,48,96)#
+	newod <- c()#
+	newod[1] <- od*0.7507 - 0.0303
+newod
+for(i in 2:length(dilutionfactors)){#
+		newod[i] <- newod[i-1]*0.7507 - 0.0303#
+	}
+newod
+dat <- data.frame(y=newod,d=dilutionfactors)#
+# 	mod <- nls(y ~ yf + (y0 - yf) * exp(-alpha * d), #
+#     data = dat,#
+#     start = list(y0 = 54, yf = 25, alpha = 1))#
+	mod <- nls(y ~ SSasymp(d, yf, y0, log_alpha),  data = dat)#
+	yf <- summary(mod)$coefficients[1,1]#
+	y0 <- summary(mod)$coefficients[2,1]#
+	log_a <- summary(mod)$coefficients[3,1]#
+	dilute <- log( (target_od - yf)/(y0-yf) ) / (-1*exp(log_a))
+dilute
+1/3.15
+plot(newod~dilutionfactors)
+estDilute <- function(od, target_od) {#
+	dilutionfactors <- c(2,4,6,8,10,12,24,48,96)#
+	newod <- c()#
+	newod[1] <- od*0.7507 - 0.0303#
+	for(i in 2:length(dilutionfactors)){#
+		newod[i] <- newod[i-1]*0.7507 - 0.0303#
+	}#
+	dat <- data.frame(y=newod,d=dilutionfactors)#
+# 	mod <- nls(y ~ yf + (y0 - yf) * exp(-alpha * d), #
+#     data = dat,#
+#     start = list(y0 = 54, yf = 25, alpha = 1))#
+	mod <- nls(y ~ SSasymp(d, yf, y0, log_alpha),  data = dat)#
+	yf <- summary(mod)$coefficients[1,1]#
+	y0 <- summary(mod)$coefficients[2,1]#
+	log_a <- summary(mod)$coefficients[3,1]#
+	dilute <- log( (target_od - yf)/(y0-yf) ) / (-1*exp(log_a))#
+    return(dilute)#
+}
+estDilute(c(0.153, 0.331,0.403,0.419,0.159,0.193,0.271,0.347),target_od=0.05)
+sapply(c(0.153, 0.331,0.403,0.419,0.159,0.193,0.271,0.347), function(z) estDilute(z,target_od=0.05))
+1/sapply(c(0.153, 0.331,0.403,0.419,0.159,0.193,0.271,0.347), function(z) estDilute(z,target_od=0.05))
+40*240
+8*20*100
+8*10*100
+8*5*40
+9600+16000+10000
+ls()
+quit()

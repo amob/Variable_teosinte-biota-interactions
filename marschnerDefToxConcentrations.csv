@@ -1,0 +1,14 @@
+ion,deficiency1,deficiency2,toxic1,toxic2,notes
+B11,5,10,100,,
+Zn66,15,20,100,,
+Ni60,0.01,0.01,10,,
+Mo98,0.1,1,1000,,
+S34,1000,5000,,,"0.1 to 0.5% plant dry weight, estimated."
+P31,3000,5000,10000,,
+Mg26,1500,3500,15000,,
+Ca44,1000,50000,,,"grasses are on low end for def. Req, as in can tolerate about 1; toxicity not usl reached, can be over 10% of dry weight without prbs"
+K39,20000,50000,,,no info on toxicity in notes
+Fe54,50,150,500,,apprx toxicity
+Mn55,10,20,200,,apprx toxicity
+Cu63,1,5,20,30,
+Na23,,,50,100,"maize is natrophobic, general plant natrophobic badness around 50-100, but maybe does not apply to C4 maize."
