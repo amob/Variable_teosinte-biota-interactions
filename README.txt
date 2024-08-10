@@ -1,6 +1,6 @@
 
 This repository contains the data and analyses presented in 
-"Local adaptation and other genotype-dependent effects in teosinte-rhizosphere biota interactions exist, but are weak"
+"Teosinte populations exhibit weak local adaptation to their rhizosphere biota despite strong effects of biota source on teosinte fitness and traits"
 by authors XXXXXXX
 Author X wrote all analyses.
 
