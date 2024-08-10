@@ -1,8 +1,9 @@
 
 This repository contains the data and analyses presented in 
 "Teosinte populations exhibit weak local adaptation to their rhizosphere biota despite strong effects of biota source on teosinte fitness and traits"
-by authors XXXXXXX
-Author X wrote all analyses.
+by authors Anna M. O'Brien, Ruairidh J.H. Sawers, Jaime Gasca-Pineda, Ivan Baxter, Luis E. Eguiarte, Jeffrey Ross-Ibarra, and Sharon Y. Strauss.
+
+Author Anna M. O'Brien wrote all analyses.
 
 Script Teo_Collecting_Map_Figure.R is makes Figure S1.
 It takes file "population locations.csv" and data downloaded from worldclim/bioclim as inputs. 
