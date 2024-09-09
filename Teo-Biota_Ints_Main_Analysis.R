@@ -718,8 +718,8 @@ for(i in which(!1:29%in%traitswquadGT)){
 #remaining variables that were highly non-normal show problematic results (Na, Zn, As, Se), these are not reported
 
 #given results of inspection, shift leaf number model to linear only, exclude from quadratic
-traitswquadGTn <- traitswquadGT[-4]
-QLvector[,4] <- rep(FALSE,time=5)
+traitswquadGTn <- traitswquadGT[-4] #(figure S8)
+QLvector[,4] <- rep(FALSE,time=5) #remaining figures
 
 
 mn_tfslopesGT <- sapply(c(2:30), function(trait) summary(fitmodsGT[[trait]])$solutions[,1])#table cols are in order of traits
@@ -768,14 +768,10 @@ for(i in 1:dim(permslopesLGT)[3]){
 		samp_trait$y <- sapply(1:nrow(samp_trait), function(z)  samp_trait$uy[z] / mean(samp_trait$uy[samp_trait$inoc==samp_trait$inoc[z]], na.rm=T))
 		samp_trait$x <- sapply(1:nrow(samp_trait), function(z)  samp_trait$ux[z] / mean(samp_trait$ux[samp_trait$inoc==samp_trait$inoc[z]], na.rm=T))
 		samp_traitf <- samp_trait[getfull(samp_trait),]
-#  	if((trait-1) %in% traitswquadGTn){		
 		sampfitmodQ <- MCMCglmm(y~x:inoc + I(x^2):inoc, data = samp_traitf, verbose=FALSE,nitt=10000, thin = 10, burnin=100)
 		permslopesQGT[,trait-1,i] <- summary(sampfitmodQ)$solutions[,1]  #intercept included, though in real and permuted data we expect this to be 1 (the average of mean-scaled biomass data should be 1)
-# 	}
-# 	else{
 		sampfitmodL <- MCMCglmm(y~x:inoc, data = samp_traitf, verbose=FALSE,nitt=10000, thin = 10, burnin=100)
 		permslopesLGT[,trait-1,i] <- c(summary(sampfitmodL)$solutions[,1], rep(NA, times=5))  #intercept included, though in real and permuted data we expect this to be 1 (the average of mean-scaled biomass data should be 1)	
-# 	}
 		permdicsLGT[trait-1,i] <-  sampfitmodL$DIC
 		permdicsQGT[trait-1,i] <-  sampfitmodL$DIC
 	}
