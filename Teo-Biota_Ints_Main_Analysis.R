@@ -640,6 +640,9 @@ for(i in 1:29){
 	}
 }
 QLpreddiffGT <- sapply(1:29, function(z) any(rowSums(DiffPredGT[,,z])>0) )
+QLpreddiffVector <- sapply(1:29, function(z) rowSums(DiffPredGT[,,z]) )
+QLpVector <- sapply(2:30, function(x) summary(fitmodsbGT[[x]])$solutions[7:11,5] < 0.05)
+
 
 DICmodtype_matGT <- cbind(unlist(lapply(fitmodsGT, function(x) x$DIC)), unlist(lapply(fitmodsbGT, function(x) x$DIC)))
 quadterm_p_matGT <-  sapply(2:30, function(x) any(summary(fitmodsbGT[[x]])$solutions[7:11,5] < 0.05))
@@ -647,10 +650,14 @@ traitswquadGT <- which(quadterm_p_matGT & DICmodtype_matGT[,2]<DICmodtype_matGT[
 #  [1]  1  2  3  4  5  6 15 18 21 22 26 28
 #These are the traits that have potentially non-linear [single-optimum/quadratic] selection gradients
 
+QLvector <- sapply(1:29, function(z) QLpreddiffVector[,z]>0 & QLpVector[,z] & (DICmodtype_matGT[z,2] < DICmodtype_matGT[z,1]) ) 
+#individual quad coefficient identity where coefficient is significant, causes a different prediction than in the linear only model, and model fits better than linear only
+#note that last criteria not coefficient specific, and also does not alter determination of stabilizing selection when removed
+
 
 fivecols <- c(rgb(range01(tann)[c(2,8:10)],0,1-range01(tann)[c(2,8:10)]),"black")
 
-#####INSPECT linear and quadratic relationships, where quadratic relationship appears to be significant
+#####INSPECT linear and quadratic relationships, where quadratic relationship appears to be significant for at least one biota
 par(mar=c(0,0,0,0))
 par(oma=c(4,4,1,1))
 layout(matrix(1:60,nrow=5,byrow=F))
@@ -712,6 +719,8 @@ for(i in which(!1:29%in%traitswquadGT)){
 
 #given results of inspection, shift leaf number model to linear only, exclude from quadratic
 traitswquadGTn <- traitswquadGT[-4]
+QLvector[,4] <- rep(FALSE,time=5)
+
 
 mn_tfslopesGT <- sapply(c(2:30), function(trait) summary(fitmodsGT[[trait]])$solutions[,1])#table cols are in order of traits
 lhpdi_tfslopesGT <- sapply(c(2:30), function(trait) summary(fitmodsGT[[trait]])$solutions[,2])#table cols are in order of traits
@@ -741,9 +750,11 @@ tfittrt_153 <- tfittrt[tfittrt$TAnn_I=="153",]
 tfittrt_186 <- tfittrt[tfittrt$TAnn_I=="186",]   
 tfittrt_198 <- tfittrt[tfittrt$TAnn_I=="198",]  
 tfittrt_none <- tfittrt[tfittrt$TAnn_I=="none",]   
-permdicsGT <- array(NA,dim=c(ncol(tfittrt)-2,1000))#1000
-permslopesGT <- array(NA,dim=c(11,ncol(tfittrt)-2,1000))#1000
-for(i in 1:dim(permslopesGT)[3]){
+permdicsLGT <- array(NA,dim=c(ncol(tfittrt)-2,1000))
+permdicsQGT <- array(NA,dim=c(ncol(tfittrt)-2,1000))
+permslopesLGT <- array(NA,dim=c(11,ncol(tfittrt)-2,1000))
+permslopesQGT <- array(NA,dim=c(11,ncol(tfittrt)-2,1000))
+for(i in 1:dim(permslopesLGT)[3]){
  	newd <- data.frame(biomass = tfittrt[,1],  #add biomass, not permuted
  		rbind(tfittrt_130[sample(1:nrow(tfittrt_130),replace=F),2:(ncol(tfittrt_130)-1)], #permute traits wrt to biomass within each treatment
  		tfittrt_153[sample(1:nrow(tfittrt_153),replace=F),2:(ncol(tfittrt_153)-1)], 
@@ -757,38 +768,51 @@ for(i in 1:dim(permslopesGT)[3]){
 		samp_trait$y <- sapply(1:nrow(samp_trait), function(z)  samp_trait$uy[z] / mean(samp_trait$uy[samp_trait$inoc==samp_trait$inoc[z]], na.rm=T))
 		samp_trait$x <- sapply(1:nrow(samp_trait), function(z)  samp_trait$ux[z] / mean(samp_trait$ux[samp_trait$inoc==samp_trait$inoc[z]], na.rm=T))
 		samp_traitf <- samp_trait[getfull(samp_trait),]
-	if((trait-1) %in% traitswquadGTn){		
-		sampfitmod <- MCMCglmm(y~x:inoc + I(x^2):inoc, data = samp_traitf, verbose=FALSE,nitt=10000, thin = 10, burnin=100)
-		permslopesGT[,trait-1,i] <- summary(sampfitmod)$solutions[,1]  #intercept included, though in real and permuted data we expect this to be 1 (the average of mean-scaled biomass data should be 1)
-	}
-	else{
-		sampfitmod <- MCMCglmm(y~x:inoc, data = samp_traitf, verbose=FALSE,nitt=10000, thin = 10, burnin=100)
-		permslopesGT[,trait-1,i] <- c(summary(sampfitmod)$solutions[,1], rep(NA, times=5))  #intercept included, though in real and permuted data we expect this to be 1 (the average of mean-scaled biomass data should be 1)	
-	}
-		permdicsGT[trait-1,i] <-  sampfitmod$DIC
+#  	if((trait-1) %in% traitswquadGTn){		
+		sampfitmodQ <- MCMCglmm(y~x:inoc + I(x^2):inoc, data = samp_traitf, verbose=FALSE,nitt=10000, thin = 10, burnin=100)
+		permslopesQGT[,trait-1,i] <- summary(sampfitmodQ)$solutions[,1]  #intercept included, though in real and permuted data we expect this to be 1 (the average of mean-scaled biomass data should be 1)
+# 	}
+# 	else{
+		sampfitmodL <- MCMCglmm(y~x:inoc, data = samp_traitf, verbose=FALSE,nitt=10000, thin = 10, burnin=100)
+		permslopesLGT[,trait-1,i] <- c(summary(sampfitmodL)$solutions[,1], rep(NA, times=5))  #intercept included, though in real and permuted data we expect this to be 1 (the average of mean-scaled biomass data should be 1)	
+# 	}
+		permdicsLGT[trait-1,i] <-  sampfitmodL$DIC
+		permdicsQGT[trait-1,i] <-  sampfitmodL$DIC
 	}
 print(i)
 }
- save(permdicsGT,file="permdicsGTQ.Rdata")
- save(permslopesGT,file="permslopesGTQ.Rdata")
+ save(permdicsLGT,file="permdicsLGT.Rdata")
+ save(permslopesLGT,file="permslopesLGT.Rdata")
+ save(permdicsQGT,file="permdicsQGT.Rdata")
+ save(permslopesQGT,file="permslopesQGT.Rdata")
 
 
-load("permslopesGTQ.Rdata")
-slopeintervalSelGT <- matrix(NA, nrow=29,ncol=11)
-permslopemnSelGT <- matrix(NA, nrow=29,ncol=11)
-isslopesigSelGT <- matrix(NA, nrow=29,ncol=11)
+load("permslopesLGT.Rdata")
+load("permslopesQGT.Rdata")
+
+slopeintervalSelQGT <- matrix(NA, nrow=29,ncol=11)
+permslopemnSelQGT <- matrix(NA, nrow=29,ncol=11)
+isslopesigSelQGT <- matrix(NA, nrow=29,ncol=11)
 for(trait in 1:29){
-	if(trait %in% traitswquadGTn){
-		slopeintervalSelGT[trait,] <- sapply(1:nrow(mn_tfslopesQGT), function(z) findInterval(mn_tfslopesQGT[z,trait],sort(permslopesGT[z,trait,]))/(dim(permslopesGT)[3])   )
-		permslopemnSelGT[trait,] <- sapply(1:nrow(mn_tfslopesQGT), function(z)  mean(permslopesGT[z,trait,]) )  
-		isslopesigSelGT[trait,] <- (slopeintervalSelGT[trait,] < 0.05 | slopeintervalSelGT[trait,] > 0.95) &  abs(mn_tfslopesQGT[,trait]) > abs(permslopemnSelGT[trait,]) #real slope needs to be both outside the permutation window AND further from 0
-	} else {
-		slopeintervalSelGT[trait,1:6] <- sapply(1:nrow(mn_tfslopesGT), function(z) findInterval(mn_tfslopesGT[z,trait],sort(permslopesGT[z,trait,]))/(dim(permslopesGT)[3])   )
-		permslopemnSelGT[trait,1:6] <- sapply(1:nrow(mn_tfslopesGT), function(z) mean(permslopesGT[z,trait,]) )
-		isslopesigSelGT[trait,1:6] <- (slopeintervalSelGT[trait,1:6] < 0.05 | slopeintervalSelGT[trait,1:6] > 0.95) &  abs(mn_tfslopesGT[,trait]) > abs(permslopemnSelGT[trait,1:6]) #real slope needs to be both outside the permutation window AND further from 0
-	}
+		slopeintervalSelQGT[trait,] <- sapply(1:nrow(mn_tfslopesQGT), function(z) findInterval(mn_tfslopesQGT[z,trait],sort(permslopesQGT[z,trait,]))/(dim(permslopesQGT)[3])   )
+		permslopemnSelQGT[trait,] <- sapply(1:nrow(mn_tfslopesQGT), function(z)  mean(permslopesQGT[z,trait,]) )  
+		isslopesigSelQGT[trait,] <- (slopeintervalSelQGT[trait,] < 0.05 | slopeintervalSelQGT[trait,] > 0.95) &  abs(mn_tfslopesQGT[,trait]) > abs(permslopemnSelQGT[trait,]) #real slope needs to be both outside the permutation window AND further from 0
 }
 
+slopeintervalSelLGT <- matrix(NA, nrow=29,ncol=11)
+permslopemnSelLGT <- matrix(NA, nrow=29,ncol=11)
+isslopesigSelLGT <- matrix(NA, nrow=29,ncol=11)
+for(trait in 1:29){
+		slopeintervalSelLGT[trait,1:6] <- sapply(1:nrow(mn_tfslopesGT), function(z) findInterval(mn_tfslopesGT[z,trait],sort(permslopesLGT[z,trait,]))/(dim(permslopesLGT)[3])   )
+		permslopemnSelLGT[trait,1:6] <- sapply(1:nrow(mn_tfslopesGT), function(z) mean(permslopesLGT[z,trait,]) )
+		isslopesigSelLGT[trait,1:6] <- (slopeintervalSelLGT[trait,1:6] < 0.05 | slopeintervalSelLGT[trait,1:6] > 0.95) &  abs(mn_tfslopesGT[,trait]) > abs(permslopemnSelLGT[trait,1:6]) #real slope needs to be both outside the permutation window AND further from 0
+	}
+
+
+##Figure S7 and 5 plot estimated selection parameters. 
+	#2x the quadratic parameter from quadratic models if quadratic parameter for trait/biota combination is considered valid (above, methods)
+	#or the linear parameter from the linear models if the quadratic parameter for the trait/biota combination is not considered valid
+	#note that models are fit for all biota at once for each trait, but parameters in the figure for each trait can come from separate models
 ##Figure S7
 fivecols <- c(rgb(range01(tann)[c(2,8:10)],0,1-range01(tann)[c(2,8:10)]),"black")
 pdf("Trait-fitness-slopes_wquad.pdf",height=6,width=5.5) 
@@ -797,20 +821,27 @@ layout(matrix(c(1:25),ncol=5,byrow=TRUE))
 par(oma=c(1,4,0.25,0))
 par(mar=c(0, 0, 0, 0))
 for(i in reportedtraits){
-	if(i %in% traitswquadGTn){	
-	plot(mn_tfslopesQGT[-1,i]~c(1:5,1:5+0.25),xaxt="n", pch = c(rep(16,times=5),rep(17,times=5)),
-		xlim=c(0,5.5), ylim=c(-2.25,3),yaxt="n", col=fivecols)
-	arrows(c(1:5,1:5+0.25),y0=lhpdi_tfslopesQGT[-1,i],y1=uhpdi_tfslopesQGT[-1,i],length=0, col=fivecols)	
- 	text(c(1:5,1:5+0.25),c(rep(3,times=5),rep(-1.4,times=5)),ifelse(isslopesigSelGT[i,-1],"*",""),col= fivecols)
-	} else {
-	plot(mn_tfslopesGT[-1,i]~c(1:5),pch=16,xaxt="n", xlim=c(0,5.5), ylim=c(-2.25,3),yaxt="n", col=fivecols)
-	arrows(c(1:5),y0=lhpdi_tfslopesGT[-1,i],y1=uhpdi_tfslopesGT[-1,i],length=0, col=fivecols)
- 	text(c(1:5),3,ifelse(isslopesigSelGT[i,-1],"*",""),col= fivecols)
-	}
+	whichtype <- QLvector[,i]
+	Quads <- which(whichtype)
+	Lins <- which(!(whichtype))
+if(length(Quads)>0){
+	plot(2*mn_tfslopesQGT[Quads+6,i]~Quads,xaxt="n", pch = 17,
+		xlim=c(0,5.5), ylim=c(-2.2,0.6),yaxt="n", col=fivecols[Quads])
+	arrows(Quads,y0=2*lhpdi_tfslopesQGT[Quads+6,i],y1=2*uhpdi_tfslopesQGT[Quads+6,i],length=0, col=fivecols[Quads])	
+ 	text(c(1:5)[Quads],-1.85,ifelse(isslopesigSelQGT[i,Quads+6],"*",""),col= fivecols[Quads])
+ 	}
+ 	else{
+ plot(1~c(1),xaxt="n", pch = NA,xlim=c(0,5.5), ylim=c(-2.2,0.6),yaxt="n")
+ 	}
+if(length(Lins)>0){
+	points(mn_tfslopesGT[Lins+1,i]~Lins,pch=16, col=fivecols[Lins])
+	arrows(Lins,y0=lhpdi_tfslopesGT[Lins+1,i],y1=uhpdi_tfslopesGT[Lins+1,i],length=0, col=fivecols[Lins])
+ 	text(c(1:5)[Lins],-1.85,ifelse(isslopesigSelLGT[i,Lins+1],"*",""),col= fivecols[Lins])
+}
 	abline(h=0,lty=3)
 	if(i %in% c(1,6,12,17,26)){axis(side=2)}
 	if(i ==12){mtext("Estimated phenotypic selection",side=2,line=2)}else{}
-	text(0,-2,c(traitnamesNL,ionnames)[i+1],adj=0)
+	text(0,-2.15,c(traitnamesNL,ionnames)[i+1],adj=0)
 }
 plot(1:10~c(1:10),pch=NA,bty="n",xaxt="n",yaxt="n")
 legend(0,10,c("13.0","15.3","18.6","19.8","none"), bty="n",fill=fivecols)
@@ -819,7 +850,6 @@ legend(0.25,3.5,c("linear","quadratic"), bty="n",pch=c(16,17))
 	text(5.5,3.25,"Selection term form")
 dev.off()
 
-
 #fewer traits, Figure 5, main text
 reduceset <- c(2,3,6,9,14,15,16,26)
 pdf("Trait-fitness-slopes_sub_wquad.pdf",height=3.75,width=3.75) 
@@ -827,20 +857,27 @@ layout(matrix(c(1:9),ncol=3,byrow=TRUE))
 par(oma=c(1,4,0.25,0))
 par(mar=c(0, 0, 0, 0))
 for(i in reduceset){
-	if(i %in% traitswquadGTn){	
-	plot(mn_tfslopesQGT[-1,i]~c(1:5,1:5+0.25),xaxt="n", pch = c(rep(16,times=5),rep(17,times=5)),
-		xlim=c(0,5.5), ylim=c(-2.25,3),yaxt="n", col=fivecols)
-	arrows(c(1:5,1:5+0.25),y0=lhpdi_tfslopesQGT[-1,i],y1=uhpdi_tfslopesQGT[-1,i],length=0, col=fivecols)	
- 	text(c(1:5,1:5+0.25),c(rep(3,times=5),rep(-1.4,times=5)),ifelse(isslopesigSelGT[i,-1],"*",""),col= fivecols)
-	} else {
-	plot(mn_tfslopesGT[-1,i]~c(1:5),pch=16,xaxt="n", xlim=c(0,5.5), ylim=c(-2.25,3),yaxt="n", col=fivecols)
-	arrows(c(1:5),y0=lhpdi_tfslopesGT[-1,i],y1=uhpdi_tfslopesGT[-1,i],length=0, col=fivecols)
- 	text(c(1:5),3,ifelse(isslopesigSelGT[i,-1],"*",""),col= fivecols)
-	}
+	whichtype <- QLvector[,i]
+	Quads <- which(whichtype)
+	Lins <- which(!(whichtype))
+if(length(Quads)>0){
+	plot(2*mn_tfslopesQGT[Quads+6,i]~Quads,xaxt="n", pch = 17,
+		xlim=c(0,5.5), ylim=c(-2.2,0.6),yaxt="n", col=fivecols[Quads])
+	arrows(Quads,y0=2*lhpdi_tfslopesQGT[Quads+6,i],y1=2*uhpdi_tfslopesQGT[Quads+6,i],length=0, col=fivecols[Quads])	
+ 	text(c(1:5)[Quads],-1.85,ifelse(isslopesigSelQGT[i,Quads+6],"*",""),col= fivecols[Quads])
+ 	}
+ 	else{
+ plot(1~c(1),xaxt="n", pch = NA,xlim=c(0,5.5), ylim=c(-2.2,0.6),yaxt="n")
+ 	}
+if(length(Lins)>0){
+	points(mn_tfslopesGT[Lins+1,i]~Lins,pch=16, col=fivecols[Lins])
+	arrows(Lins,y0=lhpdi_tfslopesGT[Lins+1,i],y1=uhpdi_tfslopesGT[Lins+1,i],length=0, col=fivecols[Lins])
+ 	text(c(1:5)[Lins],-1.85,ifelse(isslopesigSelLGT[i,Lins+1],"*",""),col= fivecols[Lins])
+}
 	abline(h=0,lty=3)
 	if(i %in% c(2,9,16)){axis(side=2)} 
 	if(i ==9){mtext("Estimated phenotypic selection",side=2,line=2)}else{}
-	text(0,-2,c(traitnamesNL,ionnames)[i+1],adj=0)
+	text(0,-2.15,c(traitnamesNL,ionnames)[i+1],adj=0)
 }
 plot(1:10~c(1:10),pch=NA,bty="n",xaxt="n",yaxt="n")
 legend(0,10,c("13.0","15.3","18.6","19.8","none"), bty="n",fill=fivecols)
@@ -1124,7 +1161,7 @@ for(i in c(1,3,5)){
 	abline(h=0,lty=3)
 	text(0,-2.8,morphnames[7],adj=0)
 	text(1:5,4.1,ifelse(isslopesig_morph[7,], "*",""),col=fivecols)
-	mtext("Estimated phenotypic selection",side=2,line=2)
+	mtext("Co-estimated parameters",side=2,line=2)
 for(i in c(8,10)){
 	plot(morph_slo[i,]~c(1:5),xaxt="n", pch = 16, xlim=c(0,5.5), ylim=c(-3,4),yaxt="n", col=fivecols)
 	points(morph_slo[i+1,]~c(1:5 + 0.25), pch = 17, col=fivecols)
@@ -1148,7 +1185,7 @@ legend(0,10,c("13.0","15.3","18.6","19.8","none"), bty="n",fill=fivecols)
 	text(4.9,9.75,"Biota Source MAT")
 plot(1:10~c(1:10),pch=NA,bty="n",xaxt="n",yaxt="n")
 legend(1,9.5,c("linear","quadratic"), bty="n",pch=c(16,17))
-	text(5,9.75,"Selection term form")
+	text(5,9.75,"Parameter form")
 dev.off()
 
 ###Figure S10
@@ -1190,7 +1227,7 @@ for(i in c(6:7)){
 	axis(side=2, at=c(-2,0,2,4), labels=c("-2","0","2","4"))
 	text(1:5,4.1,ifelse(isslopesig_nutr[8,], "*",""),col=fivecols)
 	text(c(1:5 + 0.25),-2.4,ifelse(isslopesig_nutr[8+1,], "*",""),col=fivecols)
-	mtext("Estimated phenotypic selection",side=2,line=2)
+	mtext("Co-estimated parameters",side=2,line=2)
 for(i in c(10:11)){
 	plot(nutr_slo[i,]~c(1:5),xaxt="n", pch = 16, xlim=c(0,5.5), ylim=c(-3,4),yaxt="n", col=fivecols)
 	arrows(1:5,y0=nutr_lo[i,],y1=nutr_up[i,],length=0, col=fivecols)
@@ -1221,7 +1258,7 @@ legend(0,10,c("13.0","15.3","18.6","19.8","none"), bty="n",fill=fivecols)
 	text(4.9,9.75,"Biota Source MAT")
 plot(1:10~c(1:10),pch=NA,bty="n",xaxt="n",yaxt="n")
 legend(1,9.5,c("linear","quadratic"), bty="n",pch=c(16,17))
-	text(5,9.75,"Selection term form")
+	text(5,9.75,"Parameter form")
 dev.off()
 
 
